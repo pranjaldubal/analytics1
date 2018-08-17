@@ -12,3 +12,4 @@ summary(fit)
 (p1=predict(fit, newdata = ndata1, type = 'response'))
 cbind(ndata1,p1) #for seeing both weight corrosponding to height.
 range(women$height)
+#for predicting the future value there is the time series analysis
