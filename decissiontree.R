@@ -1,0 +1,33 @@
+#variable gender
+gender= sample(x=c('Male','Female'), size = 1000, replace = T, prob = c(0.5,0.5))
+buy=sample(x=c('Buy', 'Not Buy'), size = 1000, replace = T, prob = c(0.5,0.5))
+married=sample(x=c('Married', 'Not Married'), size = 1000, replace = T, prob = c(0.3,0.7))
+age=ceiling(runif(1000,22,30))
+course= sample(x=c('Phd','MBA', 'BBA'), size = 1000, replace = T, prob = c(0.3,0.4,0.3))
+students= data.frame(buy, gender, married, age, course)
+head(students)
+library(rpart)
+library(rpart.plot)
+clatree= rpart(buy~., data = students)
+clatree
+rpart.plot(clatree, nn=T, cex = 0.7)
+clatree
+names(students)
+ndata1= data.frame(gender='Male', age=25, course='BBA', married='Not Married')
+predict(clatree, newdata = ndata1, type = 'class')
+predict(clatree, newdata = ndata1, type = 'prob')
+(ndata1= data.frame(gender='Male', age=25, course='BBA', married='Not Married'))
+(p1=predict(clatree, newdata = ndata1, type = 'class'))
+(p2=predict(clatree, newdata = ndata1, type = 'prob'))
+cbind(ndata1, p1, p2)
+(ndata1= data.frame(gender='Female', age=25, course='BBA', married='Married'))
+(p3=predict(clatree, newdata = ndata1, type = 'class'))
+(p4=predict(clatree, newdata = ndata1, type = 'prob'))
+cbind(ndata1, p1, p2)
+ctree1= rpart(buy~., data = students, cp=-1)
+ctree1
+rpart.plot(ctree1, nn=T, cex = 0.8)
+printcp(ctree1)
+ctree1b= prune(ctree1, cp=0.0031)
+rpart.plot(ctree1b)
+#cp= complexity parameter

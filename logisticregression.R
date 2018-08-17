@@ -26,4 +26,3 @@ predict(logit2, newdata = ndata1, type = 'response')
 (p1=predict(logit2, newdata = ndata1, type = 'response'))
 (ndata1= data.frame(balance=1486, student='Yes'))
 (p1=predict(logit2, newdata = ndata1, type = 'response'))
-  
